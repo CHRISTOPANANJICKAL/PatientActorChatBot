@@ -1,16 +1,27 @@
+import uuid
+
 from flask import Blueprint, request, jsonify
-from models.chat_model import create_chat, add_message, get_all_chats, get_chat
+from data.db_helper import DBHelper
 
 chat_bp = Blueprint("chat", __name__)
 
+
+db = DBHelper()
+
 @chat_bp.route("/start_chat", methods=["POST"])
 def start_chat():
-    chat_id = create_chat()
+    new_chat_id = str(uuid.uuid4())
+    chat_id = db.create_chat(chat_id=new_chat_id, user_name=request.json.get("user_name"),
+                                      user_age=request.json.get("user_age"),
+                                     user_gender=request.json.get("user_gender")
+                                     )
+
+
     return jsonify({"chat_id": chat_id, "message": "New chat started!"})
 
 @chat_bp.route("/chats", methods=["GET"])
 def list_chats():
-    return jsonify(get_all_chats())
+    return jsonify(db.list_chats())
 
 @chat_bp.route("/send_message", methods=["POST"])
 def send_message():
@@ -18,18 +29,19 @@ def send_message():
     chat_id = data.get("chat_id")
     message = data.get("message")
 
-
-    add_message(chat_id, message, 'doctor')
-
-    response = "gad to meet you doctor"
-    add_message(chat_id, response, 'bot')
+    db.add_message(chat_id=chat_id, message=message, role='doctor')
+    response = "glad to meet you doctor"
+    db.add_message(chat_id=chat_id, message=response, role='bot')
 
     return jsonify({"response": response, "role":"bot"})
 
 
 @chat_bp.route("/get_messages/<chat_id>", methods=["GET"])
 def get_messages(chat_id):
-    messages = get_chat(chat_id)
+    if not db.chat_id_exists(chat_id):
+        return jsonify({"message": "Chat not found"}), 404
+
+    messages = db.get_chat(chat_id)
     if messages is None:
-        return jsonify({"error": "Chat not found"}), 404
+        return jsonify({"error": "No message to add"}), 400
     return jsonify({"chat_id": chat_id, "messages": messages})
