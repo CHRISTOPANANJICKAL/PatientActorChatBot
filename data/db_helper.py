@@ -48,5 +48,9 @@ class DBHelper:
             for chat in self.chats.values()
         ]
 
+    def delete_chat(self, chat_id: str):
+        self.chats.pop(chat_id, None)
+
+
     def chat_id_exists(self, chat_id: str) -> bool:
         return chat_id in self.chats
