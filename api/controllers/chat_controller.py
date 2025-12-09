@@ -99,7 +99,7 @@ def send_message():
         error_message = "This question is outside the scope of this medical training tool. Please provide a clinical question to proceed."
 
         db.add_message(chat_id=chat_id, message=error_message, role='bot')
-        return jsonify({"message": error_message}), 404
+        return jsonify({"response": error_message, "role":"bot"}), 404
 
     old_message = []
     # add conversation history
