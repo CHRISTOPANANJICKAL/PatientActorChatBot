@@ -3,3 +3,4 @@ pandas>=2.3.3
 Faker>=38.2.0
 openai>=2.9.0
 python-dotenv>=1.2.1
+joblib>=1.5.2

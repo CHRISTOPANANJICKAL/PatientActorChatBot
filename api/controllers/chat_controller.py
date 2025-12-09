@@ -11,6 +11,7 @@ from data.db_helper import db
 from openai.types.chat import ChatCompletionSystemMessageParam, ChatCompletionUserMessageParam
 
 from scripts.llm_evaluation import evaluate_student_using_llm
+from scripts.message_classifier import classify
 from scripts.score_calculator import calculate_conversation_score
 
 chat_bp = Blueprint("chat", __name__)
@@ -87,8 +88,19 @@ def send_message():
 
 
     message = data.get("message")
+
+
+
     text_blob = db.get_chat(chat_id).blob
     db.add_message(chat_id=chat_id, message=message, role='doctor')
+    # OFF-TOPIC CLASSIFICATION - PMR 02-12-25
+    label = classify(message)
+    if label == "off_topic":
+        error_message = "This question is outside the scope of this medical training tool. Please provide a clinical question to proceed."
+
+        db.add_message(chat_id=chat_id, message=error_message, role='bot')
+        return jsonify({"message": error_message}), 404
+
     old_message = []
     # add conversation history
     for c in db.get_chat(chat_id).conversations:
