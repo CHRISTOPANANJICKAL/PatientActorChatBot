@@ -2,13 +2,16 @@ import json
 import os
 import random
 import uuid
+from datetime import datetime
 
 from flask import Blueprint, request, jsonify
 from openai import OpenAI
-from datetime import  datetime
 
 from data.db_helper import db
 from openai.types.chat import ChatCompletionSystemMessageParam, ChatCompletionUserMessageParam
+
+from scripts.llm_evaluation import evaluate_student_using_llm
+from scripts.score_calculator import calculate_conversation_score
 
 chat_bp = Blueprint("chat", __name__)
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
@@ -41,7 +44,7 @@ def start_chat():
     )
 
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",  # or gpt-4 if available
+        model="gpt-4o-mini",
         messages=[
             ChatCompletionUserMessageParam(role="user", content=(
         "You are a patient. Some details of disease you have is given to you. "
@@ -161,11 +164,58 @@ def delete_messages():
 
 
 @chat_bp.route("/evaluate/<chat_id>", methods=["GET"])
-def get_messages(chat_id):
+def evaluate_chat(chat_id):
     if not db.chat_id_exists(chat_id):
-        return jsonify({"message": "Chat not found"}), 404
+        return jsonify({"error": "Chat not found"}), 404
 
-    messages = db.get_chat(chat_id)
+
+
+
+    messages = db.get_chat(chat_id).conversations
+    if len(messages) <2:
+        return jsonify({"error": "No enough conversation to evaluate"}), 400
+
+    # Time evaluation
+    first_message_raw = db.get_chat(chat_id).conversations[0].timestamp
+    last_message_raw = db.get_chat(chat_id).conversations[-1].timestamp
+
+    # Convert to datetime
+    first_message = datetime.fromisoformat(first_message_raw)
+    last_message = datetime.fromisoformat(last_message_raw)
+
+    # Now subtraction works
+    duration = (last_message - first_message).total_seconds()
+
+    # Questions Length
+    total_words = 0
+    for msg in messages:
+        if msg.role == "doctor":
+            # Split by whitespace to get words
+            word_count = len(msg.message.split())
+            total_words += word_count
+
+    # Accuracy & Friendliness evaluation (LLM)
+    llm_result = evaluate_student_using_llm(conversation=messages, correct_diagnosis=db.get_chat(chat_id).actual_disease)
+
+
+    diagnosis_accuracy = llm_result['diagnosis_accuracy']
+    conversation_friendlines = llm_result['conversation_friendliness']
+    missed_questions = llm_result['missed_questions']
+
+    final_score = calculate_conversation_score(
+        duration_seconds = duration,
+        total_words=total_words,
+        diagnosis_accuracy= diagnosis_accuracy,
+        conversation_friendliness= conversation_friendlines,
+        missed_questions_count= len(missed_questions)
+    )
+
+
     if messages is None:
-        return jsonify({"error": "No message to add"}), 400
-    return jsonify(messages)
+        return jsonify({"error": "Something went wrong"}), 400
+    return jsonify({
+        "final_score": final_score,
+        "conversation_friendlines": conversation_friendlines,
+        "missed_questions": missed_questions,
+        "diagnosis_accuracy": diagnosis_accuracy,
+    })
