@@ -13,7 +13,7 @@ def calculate_conversation_score(
     # 1. Normalize duration (shorter = better)
     # -------------------------
     # Define upper limit (anything above this gets 0)
-    MAX_DURATION = 1200  # 10 minutes
+    MAX_DURATION = 1200  # 20 minutes
 
     duration_score = max(0, 1 - (duration_seconds / MAX_DURATION))
     duration_score *= 10  # convert to 0–10
@@ -22,7 +22,7 @@ def calculate_conversation_score(
     # -------------------------
     # 2. Normalize word count (fewer = better)
     # -------------------------
-    MAX_WORDS = 400  # anything above this = 0 score
+    MAX_WORDS = 1000  # anything above this = 0 score
 
     word_score = max(0, 1 - (total_words / MAX_WORDS))
     word_score *= 10
@@ -43,7 +43,7 @@ def calculate_conversation_score(
     # -------------------------
     # 5. Missed questions (fewer = better)
     # -------------------------
-    MAX_MISSED = 5
+    MAX_MISSED = 3
 
     missed_score = max(0, 1 - (missed_questions_count / MAX_MISSED))
     missed_score *= 10
