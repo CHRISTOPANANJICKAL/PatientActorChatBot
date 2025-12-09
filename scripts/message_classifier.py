@@ -4,7 +4,7 @@ import logging
 
 
 
-CLASSIFIER_THRESHOLD = float(os.getenv("CLASSIFIER_THRESHOLD", 0.5))
+# CLASSIFIER_THRESHOLD = float(os.getenv("CLASSIFIER_THRESHOLD", 0.5))
 CLASSIFIER_MODEL_VERSION = os.getenv("CLASSIFIER_MODEL_VERSION", "1.0.0")
 
 
@@ -19,12 +19,16 @@ logger.setLevel(logging.INFO)
 # =====================================================================================
 MODEL_PATH = os.path.join("ml_models", "message_classifier.pkl")
 
-try:
-    model = joblib.load(MODEL_PATH)
-    logger.info(f"[MessageClassifier] Model loaded from {MODEL_PATH}")
-except Exception as e:
-    logger.error(f"[MessageClassifier] Failed to load model: {e}")
-    model = None   # fallback: safe degradation
+svc_model = None
+
+def load_classifier():
+    try:
+        global svc_model
+        svc_model = joblib.load(MODEL_PATH)
+        logger.info(f"[MessageClassifier] Model loaded from {MODEL_PATH}")
+    except Exception as e:
+        logger.error(f"[MessageClassifier] Failed to load model: {e}")
+        svc_model = None  # fallback: safe degradation
 
 
 # =====================================================================================
@@ -56,6 +60,9 @@ def classify(text: str) -> str:
     Returns:
         str: "on_topic" or "off_topic"
     """
+    global svc_model
+    CLASSIFIER_THRESHOLD = -0.5
+
 
     logger.info(f"[Classifier v{CLASSIFIER_MODEL_VERSION}] Running inference…")
 
@@ -65,36 +72,44 @@ def classify(text: str) -> str:
     # If empty → treat as off-topic
     if not message:
         logger.warning("[MessageClassifier] Empty message detected → off_topic")
+        print('off_topic because message is empty')
         return "off_topic"
 
     # If model failed to load, fail gracefully
-    if model is None:
+    if svc_model is None:
         logger.warning("[MessageClassifier] Model unavailable → default to on_topic")
+        print("on_topic = model unavailable")
         return "on_topic"
+
 
     try:
         # ------------------------------
         # 1. Compute decision score (confidence proxy)
         # ------------------------------
-        score = model.decision_function([message])[0]
+        score = svc_model.decision_function([message])[0]
         logger.info(f"[MessageClassifier] decision_function score={score:.4f} threshold={CLASSIFIER_THRESHOLD}")
 
         # ------------------------------
         # 2. Apply REAL threshold
         # ------------------------------
+        # if score < CLASSIFIER_THRESHOLD:
+        print(f'score={score:.4f} threshold={CLASSIFIER_THRESHOLD} {score < CLASSIFIER_THRESHOLD}')
         if score < CLASSIFIER_THRESHOLD:
+            print(f'Off-topic, because score less then threshold')
             logger.info("[MessageClassifier] Below threshold → off_topic")
             return "off_topic"
+        return 'on_topic'
 
-        # ------------------------------
-        # 3. Predict using model
-        # ------------------------------
-        prediction = model.predict([message])[0]
-        logger.info(f"[MessageClassifier] Model prediction → {prediction}")
-        return prediction
+        # # ------------------------------
+        # # 3. Predict using model
+        # # ------------------------------
+        # prediction = svc_model.predict([message])[0]
+        # logger.info(f"[MessageClassifier] Model prediction → {prediction}")
+        # print(f'prediction={prediction}')
 
     except Exception as e:
         logger.error(f"[MessageClassifier] Prediction error: {e}")
+        print(f'on topic due to exception: {e}')
         return "on_topic"  # safest fallback
 
 
