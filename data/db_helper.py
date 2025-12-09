@@ -17,7 +17,7 @@ class DBHelper:
             return self.cases_json
 
         # path = "data/processed/cases_part_00001.json"
-        path = "data/processed/sample.json"
+        path = "data/processed/cases_part1.json"
         if not os.path.exists(path):
             raise FileNotFoundError(f"JSON file not found: {path}")
 

@@ -226,6 +226,11 @@ def evaluate_chat(chat_id):
     if messages is None:
         return jsonify({"error": "Something went wrong"}), 400
     return jsonify({
+        "total_time": duration,
+        "patient_name": db.get_chat(chat_id).user_name,
+        "actual_disease":db.get_chat(chat_id).actual_disease,
+        "ddx":db.get_chat(chat_id).ddx_list,
+        "words":total_words,
         "final_score": final_score,
         "conversation_friendlines": conversation_friendlines,
         "missed_questions": missed_questions,

@@ -6,7 +6,7 @@ from openai.types.chat import ChatCompletionUserMessageParam, ChatCompletionSyst
 
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
-def evaluate_student_using_llm(conversation, correct_diagnosis):
+def evaluate_student_using_llm(conversation, correct_diagnosis, ):
     conversation_text = ""
     for msg in conversation:
         conversation_text += f"{msg.role.capitalize()}: {msg.message}\n"
@@ -43,19 +43,20 @@ Conversation:
 
 Correct diagnosis: {correct_diagnosis}
 
-
+Go through the conversation and if you find the correct diagnosis in the chat, give the credits accordingly.
 Now evaluate and return the JSON only.
     """
 
+
+    print(user_prompt)
     # Call OpenAI
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-5.1",
         messages=[
             ChatCompletionSystemMessageParam(role="system", content= system_prompt),
             ChatCompletionUserMessageParam(role="user", content= user_prompt)
         ],
         temperature=0.4,
-        max_tokens=3000
     )
 
 
