@@ -1,4 +1,10 @@
+from dotenv import load_dotenv
+
 from api import create_app
+from data.db_helper import db
+
+db.load_cases_from_json()
+load_dotenv()
 
 app = create_app()
 

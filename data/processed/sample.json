@@ -1,0 +1,497 @@
+[
+  {
+    "row_index": 0,
+    "patient": {
+      "name": "Daniel Rodriguez",
+      "age": 18,
+      "gender": "M",
+      "actual_disease": "URTI",
+      "initial_symptom": {
+        "question": "Do you have a fever (either felt or measured with a thermometer)?",
+        "answer": "Yes"
+      },
+      "other_symptom": [
+        {
+          "question": "Do you live with 4 or more people?",
+          "answer": "Yes"
+        },
+        {
+          "question": "Have you had significantly increased sweating?",
+          "answer": "No"
+        },
+        {
+          "question": "Do you have pain somewhere, related to your reason for consulting?",
+          "answer": "Yes"
+        },
+        {
+          "question": "Characterize your pain:",
+          "answer": "heavy"
+        },
+        {
+          "question": "Characterize your pain:",
+          "answer": "heavy"
+        },
+        {
+          "question": "Do you feel pain somewhere?",
+          "answer": "nowhere"
+        },
+        {
+          "question": "Do you feel pain somewhere?",
+          "answer": "elbow(L)"
+        },
+        {
+          "question": "Do you feel pain somewhere?",
+          "answer": "trapezius(L)"
+        },
+        {
+          "question": "How intense is the pain?",
+          "answer": "4.0/10"
+        },
+        {
+          "question": "Does the pain radiate to another location?",
+          "answer": "bottom lip(R)"
+        },
+        {
+          "question": "How precisely is the pain located?",
+          "answer": "3.0/10"
+        },
+        {
+          "question": "How fast did the pain appear?",
+          "answer": "3.0/10"
+        },
+        {
+          "question": "Do you have a cough that produces colored or more abundant sputum than usual?",
+          "answer": "Yes"
+        },
+        {
+          "question": "Do you smoke cigarettes?",
+          "answer": "Yes"
+        },
+        {
+          "question": "Do you have a fever (either felt or measured with a thermometer)?",
+          "answer": "Yes"
+        },
+        {
+          "question": "Do you have a sore throat?",
+          "answer": "Yes"
+        },
+        {
+          "question": "Do you have a cough?",
+          "answer": "No"
+        },
+        {
+          "question": "Have you traveled out of the country in the last 4 weeks?",
+          "answer": "Central America"
+        },
+        {
+          "question": "Are you exposed to secondhand cigarette smoke on a daily basis?",
+          "answer": "No"
+        }
+      ],
+      "ddx_list": [
+        {
+          "symptom": "Bronchitis",
+          "probability": 19
+        },
+        {
+          "symptom": "Pneumonia",
+          "probability": 18
+        },
+        {
+          "symptom": "URTI",
+          "probability": 16
+        },
+        {
+          "symptom": "Bronchiectasis",
+          "probability": 12
+        },
+        {
+          "symptom": "Tuberculosis",
+          "probability": 11
+        },
+        {
+          "symptom": "Influenza",
+          "probability": 11
+        },
+        {
+          "symptom": "HIV (initial infection)",
+          "probability": 7
+        },
+        {
+          "symptom": "Chagas",
+          "probability": 5
+        }
+      ]
+    }
+  },
+  {
+    "row_index": 1,
+    "patient": {
+      "name": "Travis Murray",
+      "age": 21,
+      "gender": "M",
+      "actual_disease": "HIV (initial infection)",
+      "initial_symptom": {
+        "question": "Have you had significantly increased sweating?",
+        "answer": "No"
+      },
+      "other_symptom": [
+        {
+          "question": "Do you have swollen or painful lymph nodes?",
+          "answer": "No"
+        },
+        {
+          "question": "Have you ever had a sexually transmitted infection?",
+          "answer": "Yes"
+        },
+        {
+          "question": "Have you had significantly increased sweating?",
+          "answer": "Yes"
+        },
+        {
+          "question": "Have you had diarrhea or an increase in stool frequency?",
+          "answer": "No"
+        },
+        {
+          "question": "Do you have pain somewhere, related to your reason for consulting?",
+          "answer": "No"
+        },
+        {
+          "question": "Characterize your pain:",
+          "answer": "NA"
+        },
+        {
+          "question": "Do you feel pain somewhere?",
+          "answer": "lower gum"
+        },
+        {
+          "question": "Do you feel pain somewhere?",
+          "answer": "dorsal aspect of the wrist(R)"
+        },
+        {
+          "question": "Do you feel pain somewhere?",
+          "answer": "thyroid cartilage"
+        },
+        {
+          "question": "How intense is the pain?",
+          "answer": "7.0/10"
+        },
+        {
+          "question": "Does the pain radiate to another location?",
+          "answer": "toe (3)(L)"
+        },
+        {
+          "question": "How precisely is the pain located?",
+          "answer": "7.0/10"
+        },
+        {
+          "question": "How fast did the pain appear?",
+          "answer": "2.0/10"
+        },
+        {
+          "question": "Do you have a fever (either felt or measured with a thermometer)?",
+          "answer": "No"
+        },
+        {
+          "question": "Have you had unprotected sex with more than one partner in the last 6 months?",
+          "answer": "Yes"
+        },
+        {
+          "question": "Do you have any lesions, redness or problems on your skin that you believe are related to the condition you are consulting for?",
+          "answer": "No"
+        },
+        {
+          "question": "What color is the rash?",
+          "answer": "pale"
+        },
+        {
+          "question": "Do your lesions peel off?",
+          "answer": "N"
+        },
+        {
+          "question": "Is the rash swollen?",
+          "answer": "0.0/10"
+        },
+        {
+          "question": "Where is the affected region located?",
+          "answer": "trapezius(R)"
+        },
+        {
+          "question": "Where is the affected region located?",
+          "answer": "thoracic spine"
+        },
+        {
+          "question": "Where is the affected region located?",
+          "answer": "vaginal wall(L)"
+        },
+        {
+          "question": "Where is the affected region located?",
+          "answer": "axilla(R)"
+        },
+        {
+          "question": "Where is the affected region located?",
+          "answer": "ear(L)"
+        },
+        {
+          "question": "How intense is the pain caused by the rash?",
+          "answer": "6.0/10"
+        },
+        {
+          "question": "Is the lesion (or are the lesions) larger than 1cm?",
+          "answer": "N"
+        },
+        {
+          "question": "How severe is the itching?",
+          "answer": "0.0/10"
+        },
+        {
+          "question": "Are you feeling nauseous or do you feel like vomiting?",
+          "answer": "No"
+        },
+        {
+          "question": "Have you had an involuntary weight loss over the last 3 months?",
+          "answer": "Yes"
+        },
+        {
+          "question": "Have you had sexual intercourse with an HIV-positive partner in the past 12 months?",
+          "answer": "No"
+        },
+        {
+          "question": "Have you traveled out of the country in the last 4 weeks?",
+          "answer": "Asia"
+        }
+      ],
+      "ddx_list": [
+        {
+          "symptom": "HIV (initial infection)",
+          "probability": 52
+        },
+        {
+          "symptom": "Chagas",
+          "probability": 32
+        },
+        {
+          "symptom": "Scombroid food poisoning",
+          "probability": 13
+        },
+        {
+          "symptom": "Sarcoidosis",
+          "probability": 2
+        }
+      ]
+    }
+  },
+  {
+    "row_index": 2,
+    "patient": {
+      "name": "Emily Carter",
+      "age": 19,
+      "gender": "F",
+      "actual_disease": "Pneumonia",
+      "initial_symptom": {
+        "question": "Do you have a cough that produces colored or more abundant sputum than usual?",
+        "answer": "No"
+      },
+      "other_symptom": [
+        {
+          "question": "Do you have pain somewhere, related to your reason for consulting?",
+          "answer": "No"
+        },
+        {
+          "question": "Characterize your pain:",
+          "answer": "scary"
+        },
+        {
+          "question": "Characterize your pain:",
+          "answer": "sickening"
+        },
+        {
+          "question": "Do you feel pain somewhere?",
+          "answer": "posterior aspect of the ankle(L)"
+        },
+        {
+          "question": "Do you feel pain somewhere?",
+          "answer": "iliac wing(R)"
+        },
+        {
+          "question": "Do you feel pain somewhere?",
+          "answer": "scapula(R)"
+        },
+        {
+          "question": "Do you feel pain somewhere?",
+          "answer": "clitoris"
+        },
+        {
+          "question": "Do you feel pain somewhere?",
+          "answer": "trapezius(L)"
+        },
+        {
+          "question": "How intense is the pain?",
+          "answer": "5.0/10"
+        },
+        {
+          "question": "Does the pain radiate to another location?",
+          "answer": "iliac fossa(L)"
+        },
+        {
+          "question": "How precisely is the pain located?",
+          "answer": "2.0/10"
+        },
+        {
+          "question": "How fast did the pain appear?",
+          "answer": "6.0/10"
+        },
+        {
+          "question": "Do you have a cough that produces colored or more abundant sputum than usual?",
+          "answer": "Yes"
+        },
+        {
+          "question": "Do you drink alcohol excessively or do you have an addiction to alcohol?",
+          "answer": "Yes"
+        },
+        {
+          "question": "Do you smoke cigarettes?",
+          "answer": "Yes"
+        },
+        {
+          "question": "Have you had chills or shivers?",
+          "answer": "No"
+        },
+        {
+          "question": "Do you have heart failure?",
+          "answer": "No"
+        },
+        {
+          "question": "Have you ever had pneumonia?",
+          "answer": "No"
+        },
+        {
+          "question": "Do you have a chronic obstructive pulmonary disease (COPD)?",
+          "answer": "Yes"
+        },
+        {
+          "question": "Do you have asthma or have you ever had to use a bronchodilator in the past?",
+          "answer": "No"
+        },
+        {
+          "question": "Do you have any lesions, redness or problems on your skin that you believe are related to the condition you are consulting for?",
+          "answer": "Yes"
+        },
+        {
+          "question": "What color is the rash?",
+          "answer": "dark"
+        },
+        {
+          "question": "Do your lesions peel off?",
+          "answer": "N"
+        },
+        {
+          "question": "Is the rash swollen?",
+          "answer": "4.0/10"
+        },
+        {
+          "question": "Where is the affected region located?",
+          "answer": "ear(L)"
+        },
+        {
+          "question": "Where is the affected region located?",
+          "answer": "vermilion(R)"
+        },
+        {
+          "question": "How intense is the pain caused by the rash?",
+          "answer": "0.0/10"
+        },
+        {
+          "question": "Is the lesion (or are the lesions) larger than 1cm?",
+          "answer": "Y"
+        },
+        {
+          "question": "How severe is the itching?",
+          "answer": "0.0/10"
+        },
+        {
+          "question": "Do you have diffuse (widespread) muscle pain?",
+          "answer": "Yes"
+        },
+        {
+          "question": "Have you noticed any new fatigue, generalized and vague discomfort, diffuse (widespread) muscle aches or a change in your general well-being related to your consultation today?",
+          "answer": "Yes"
+        },
+        {
+          "question": "Do you have nasal congestion or a clear runny nose?",
+          "answer": "Yes"
+        },
+        {
+          "question": "Do you have a cough?",
+          "answer": "No"
+        },
+        {
+          "question": "Have you traveled out of the country in the last 4 weeks?",
+          "answer": "Europe"
+        }
+      ],
+      "ddx_list": [
+        {
+          "symptom": "Bronchitis",
+          "probability": 11
+        },
+        {
+          "symptom": "Pneumonia",
+          "probability": 10
+        },
+        {
+          "symptom": "Unstable angina",
+          "probability": 8
+        },
+        {
+          "symptom": "Possible NSTEMI / STEMI",
+          "probability": 8
+        },
+        {
+          "symptom": "Bronchiectasis",
+          "probability": 8
+        },
+        {
+          "symptom": "Boerhaave",
+          "probability": 8
+        },
+        {
+          "symptom": "Spontaneous rib fracture",
+          "probability": 8
+        },
+        {
+          "symptom": "Pericarditis",
+          "probability": 8
+        },
+        {
+          "symptom": "URTI",
+          "probability": 7
+        },
+        {
+          "symptom": "Stable angina",
+          "probability": 7
+        },
+        {
+          "symptom": "GERD",
+          "probability": 6
+        },
+        {
+          "symptom": "Scombroid food poisoning",
+          "probability": 6
+        },
+        {
+          "symptom": "Chagas",
+          "probability": 3
+        },
+        {
+          "symptom": "Sarcoidosis",
+          "probability": 2
+        },
+        {
+          "symptom": "Panic attack",
+          "probability": 1
+        }
+      ]
+    }
+  }
+]
