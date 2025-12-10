@@ -61,7 +61,7 @@ def classify(text: str) -> str:
         str: "on_topic" or "off_topic"
     """
     global svc_model
-    CLASSIFIER_THRESHOLD = -0.5
+    CLASSIFIER_THRESHOLD = -0.7
 
 
     logger.info(f"[Classifier v{CLASSIFIER_MODEL_VERSION}] Running inference…")
