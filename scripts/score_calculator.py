@@ -1,3 +1,6 @@
+from data.db_helper import db
+
+
 def calculate_conversation_score(
     duration_seconds,
     total_words,
@@ -52,13 +55,7 @@ def calculate_conversation_score(
     # -------------------------
     # FINAL WEIGHTS
     # -------------------------
-    WEIGHTS = {
-        "duration": 0.15,
-        "words": 0.15,
-        "diagnosis": 0.30,
-        "friendliness": 0.25,
-        "missed": 0.15,
-    }
+    WEIGHTS = db.get_metrics()
 
     final_score = (
         duration_score * WEIGHTS["duration"] +

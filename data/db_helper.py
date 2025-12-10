@@ -4,11 +4,20 @@ from models.chat_model import Chat, Conversation
 import json
 import os
 
+default_metrics = {
+        "duration": 0.2,
+        "words": 0.2,
+        "diagnosis": 0.4,
+        "friendliness": 0.1,
+        "missed": 0.1,
+    }
+
 
 class DBHelper:
     def __init__(self):
         self.chats: Dict[str, Chat] = {}    # key = chat_id, value = Chat object
         self.cases_json: List = []
+        self.metrics = default_metrics
 
 
     # Load the cases from the json
@@ -90,6 +99,12 @@ class DBHelper:
 
     def chat_id_exists(self, chat_id: str) -> bool:
         return chat_id in self.chats
+
+    def get_metrics(self) -> Dict[str, float]:
+        return self.metrics
+
+    def save_metrics(self, metrics: Dict[str, float]):
+        self.metrics = metrics
 
 
 db = DBHelper()

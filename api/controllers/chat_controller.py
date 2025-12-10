@@ -238,3 +238,14 @@ def evaluate_chat(chat_id):
         "missed_questions": missed_questions,
         "diagnosis_accuracy": diagnosis_accuracy,
     })
+
+
+@chat_bp.route("/metrics", methods=["GET"])
+def get_metrics():
+    return jsonify(db.get_metrics()), 200
+
+@chat_bp.route("/set_metrics", methods=["POST"])
+def save_metrics():
+    data = request.get_json()
+    db.save_metrics(data)
+    return jsonify({"message":"ok"}), 200
